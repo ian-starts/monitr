@@ -8,24 +8,20 @@ class TimerList extends StatefulWidget {
   final Function buildRow;
 
   @override
-  TimerListState createState() => TimerListState(this.itemCount, this.buildRow);
+  TimerListState createState() => TimerListState();
 }
 
 class TimerListState extends State<TimerList> {
-  int itemCount;
-  Function buildRow;
-
-  TimerListState(this.itemCount, this.buildRow);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
-        itemCount: itemCount,
+        itemCount: widget.itemCount,
         itemBuilder: /*1*/ (context, i) {
           /*2*/
           final index = i ~/ 2; /*3*/
-          return this.buildRow(generateWordPairs().take(1).toList().first);
+          return widget.buildRow(generateWordPairs().take(1).toList().first);
         });
   }
 }

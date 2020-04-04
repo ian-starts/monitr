@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
 class RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
+
   // #enddocregion RWS-var
 
   // #docregion _buildSuggestions
@@ -28,7 +29,8 @@ class RandomWordsState extends State<RandomWords> {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemBuilder: /*1*/ (context, i) {
-          if (i.isOdd) return Divider(); /*2*/
+          if (i.isOdd) return Divider();
+          /*2*/
 
           final index = i ~/ 2; /*3*/
           if (index >= _suggestions.length) {
@@ -37,6 +39,7 @@ class RandomWordsState extends State<RandomWords> {
           return _buildRow(_suggestions[index]);
         });
   }
+
   // #enddocregion _buildSuggestions
 
   // #docregion _buildRow
@@ -46,11 +49,13 @@ class RandomWordsState extends State<RandomWords> {
         pair.asPascalCase,
         style: _biggerFont,
       ),
-      onTap: (){print('test');},
+      onTap: () {
+        print('test');
+      },
     );
   }
-  // #enddocregion _buildRow
 
+  // #enddocregion _buildRow
   // #docregion RWS-build
   @override
   Widget build(BuildContext context) {
@@ -59,6 +64,13 @@ class RandomWordsState extends State<RandomWords> {
         title: Text('Startup Name Generator'),
       ),
       body: _buildSuggestions(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          print('test');
+        },
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 // #enddocregion RWS-build

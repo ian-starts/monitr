@@ -1,82 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
-import 'package:monitr/src/TimerList.dart';
+import 'package:monitr/src/pages/AddTimerPage.dart';
+import 'package:monitr/src/pages/HomePage.dart';
 
 void main() => runApp(MyApp());
 
-// #docregion MyApp
 class MyApp extends StatelessWidget {
-  // #docregion build
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: <String, WidgetBuilder>{
-        '/a': (BuildContext context) => RandomWords(),
-        '/b': (BuildContext context) => RandomWords(),
+        '/home': (BuildContext context) => HomePage(),
+        '/addTimer': (BuildContext context) => AddTimerPage(),
       },
-      initialRoute: '/a',
-    );
-  }
-// #enddocregion build
-}
-// #enddocregion MyApp
-
-// #docregion RWS-var
-class RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-  final _biggerFont = const TextStyle(fontSize: 18.0);
-
-  int _itemCount = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _itemCount++;
-    });
-  }
-  // #enddocregion _buildSuggestions
-
-  // #docregion _buildRow
-  Widget _buildRow(WordPair pair) {
-    return ListTile(
-      title: Text(
-        pair.asPascalCase,
-        style: _biggerFont,
+      initialRoute: '/home',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
       ),
-      onTap: () {
-        print('test');
-      },
     );
   }
-
-  // #enddocregion _buildRow
-  // #docregion RWS-build
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Startup Name Generator'),
-      ),
-      body: TimerList(itemCount: _itemCount, buildRow: _buildRow),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _incrementCounter();
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.play_arrow),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-// #enddocregion RWS-build
-// #docregion RWS-var
-}
-// #enddocregion RWS-var
-
-class RandomWords extends StatefulWidget {
-  @override
-  RandomWordsState createState() => RandomWordsState();
 }

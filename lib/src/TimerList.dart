@@ -1,30 +1,21 @@
+import 'package:english_words/english_words.dart';
 import 'package:flutter/cupertino.dart';
 
 class TimerList extends StatefulWidget {
-  TimerList({Key key, this.itemCount, this.buildRow}) : super(key: key);
+  TimerList({@required this.itemCount, @required this.buildRow});
+
   final int itemCount;
-  final Widget buildRow;
+  final Function buildRow;
 
   @override
-  TimerListState createState() => TimerListState(itemCount, buildRow);
+  TimerListState createState() => TimerListState(this.itemCount, this.buildRow);
 }
 
 class TimerListState extends State<TimerList> {
   int itemCount;
-  Widget buildRow;
+  Function buildRow;
 
   TimerListState(this.itemCount, this.buildRow);
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      itemCount++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +24,8 @@ class TimerListState extends State<TimerList> {
         itemCount: itemCount,
         itemBuilder: /*1*/ (context, i) {
           /*2*/
-
           final index = i ~/ 2; /*3*/
-          return buildRow;
+          return this.buildRow(generateWordPairs().take(1).toList().first);
         });
   }
 }

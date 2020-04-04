@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:monitr/src/TimerList.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: <String, WidgetBuilder>{
         '/a': (BuildContext context) => RandomWords(),
+        '/b': (BuildContext context) => RandomWords(),
       },
       initialRoute: '/a',
     );
@@ -23,6 +25,7 @@ class MyApp extends StatelessWidget {
 class RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
+
   int _itemCount = 0;
 
   void _incrementCounter() {
@@ -35,25 +38,6 @@ class RandomWordsState extends State<RandomWords> {
       _itemCount++;
     });
   }
-
-  // #enddocregion RWS-var
-
-  // #docregion _buildSuggestions
-  Widget _buildSuggestions() {
-    return ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        itemCount: _itemCount,
-        itemBuilder: /*1*/ (context, i) {
-          /*2*/
-
-          final index = i ~/ 2; /*3*/
-          if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(1)); /*4*/
-          }
-          return _buildRow(_suggestions[index]);
-        });
-  }
-
   // #enddocregion _buildSuggestions
 
   // #docregion _buildRow
@@ -77,7 +61,7 @@ class RandomWordsState extends State<RandomWords> {
       appBar: AppBar(
         title: Text('Startup Name Generator'),
       ),
-      body: _buildSuggestions(),
+      body: TimerList(itemCount: _itemCount, buildRow: _buildRow),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _incrementCounter();

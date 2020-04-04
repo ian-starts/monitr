@@ -21,6 +21,18 @@ class MyApp extends StatelessWidget {
 class RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
+  int _itemCount = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _itemCount++;
+    });
+  }
 
   // #enddocregion RWS-var
 
@@ -28,8 +40,8 @@ class RandomWordsState extends State<RandomWords> {
   Widget _buildSuggestions() {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
+        itemCount: _itemCount,
         itemBuilder: /*1*/ (context, i) {
-          if (i.isOdd) return Divider();
           /*2*/
 
           final index = i ~/ 2; /*3*/
@@ -66,7 +78,7 @@ class RandomWordsState extends State<RandomWords> {
       body: _buildSuggestions(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print('test');
+          _incrementCounter();
         },
         tooltip: 'Increment',
         child: Icon(Icons.play_arrow),

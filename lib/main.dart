@@ -69,7 +69,7 @@ class RandomWordsState extends State<RandomWords> {
           print('test');
         },
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: Icon(Icons.play_arrow),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

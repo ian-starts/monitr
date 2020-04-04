@@ -9,8 +9,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup Name Generator',
-      home: RandomWords(),
+      routes: <String, WidgetBuilder>{
+        '/a': (BuildContext context) => RandomWords(),
+      },
+      initialRoute: '/a',
     );
   }
 // #enddocregion build
@@ -46,7 +48,7 @@ class RandomWordsState extends State<RandomWords> {
 
           final index = i ~/ 2; /*3*/
           if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10)); /*4*/
+            _suggestions.addAll(generateWordPairs().take(1)); /*4*/
           }
           return _buildRow(_suggestions[index]);
         });

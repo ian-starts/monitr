@@ -46,6 +46,7 @@ class RandomWordsState extends State<RandomWords> {
         pair.asPascalCase,
         style: _biggerFont,
       ),
+      onTap: (){print('test');},
     );
   }
   // #enddocregion _buildRow

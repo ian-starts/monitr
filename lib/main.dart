@@ -13,9 +13,8 @@ class MyApp extends StatelessWidget {
         '/addTimer': (BuildContext context) => AddTimerPage(),
       },
       initialRoute: '/home',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
+      theme:ThemeData.from(colorScheme: ColorScheme.dark(secondary: Colors.blueGrey)),
+      darkTheme: ThemeData.from(colorScheme: ColorScheme.dark(secondary: Colors.red)),
     );
   }
 }

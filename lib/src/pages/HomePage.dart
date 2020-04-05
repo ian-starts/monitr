@@ -7,9 +7,6 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Monitr'),
-      ),
       body: TimerList(items: <Widget>[],),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

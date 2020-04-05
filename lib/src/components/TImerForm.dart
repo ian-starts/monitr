@@ -1,17 +1,16 @@
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TimerFormState extends State<TimerForm> {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-  //
-  // Note: This is a `GlobalKey<FormState>`,
-  // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
+  TextEditingController controller = new TextEditingController();
+  GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    // Build a Form widget using the _formKey created above.
+    // Build a Form widget using the _formKey created above
+    // .
     return Form(
         key: _formKey,
         child: Padding(
@@ -33,21 +32,70 @@ class TimerFormState extends State<TimerForm> {
                       return null;
                     },
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: RaisedButton(
-                      onPressed: () {
-                        // Validate returns true if the form is valid, or false
-                        // otherwise.
-                        if (_formKey.currentState.validate()) {
-                          // If the form is valid, display a Snackbar.
-                          Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text('Processing Data')));
-                        }
-                      },
-                      child: Text('Submit'),
-                    ),
+                  AutoCompleteTextField<String>(
+                    decoration: new InputDecoration(
+                        contentPadding:
+                            EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 20.0),
+                        filled: true,
+                        hintText: 'Search Player Name',
+                        hintStyle: TextStyle(color: Colors.black)),
+                    itemBuilder: (context, item) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            item,
+                            style: TextStyle(fontSize: 16.0),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                          ),
+                          Text(
+                            item,
+                          )
+                        ],
+                      );
+                    },
+                    itemFilter: (item, query) {
+                      return item
+                          .toLowerCase()
+                          .startsWith(query.toLowerCase());
+                    },
+                    itemSorter: (a, b) {
+                      return a.compareTo(b);
+                    },
+                    itemSubmitted: (item) {
+                      setState(() => this.controller.text = item);
+                    },
+                    key: key,
+                    suggestions: ['one', 'two', 'three'],
+                    clearOnSubmit: false,
                   ),
+//                  DropdownButtonFormField<String>(
+//                    value: dropdownValue,
+//                    decoration: (
+//                      InputDecoration(
+//                        labelText: 'Project',
+//                        hintText: 'Under what project do you want this timer?',
+//                      )
+//                    ),
+//                    icon: Icon(Icons.arrow_downward),
+//                    iconSize: 24,
+//                    elevation: 16,
+//                    onChanged: (String newValue) {
+//                      setState(() {
+//                        dropdownValue = newValue;
+//                      });
+//                    },
+//                    items: <String>['Project', 'Two', 'Free', 'Four']
+//                        .map<DropdownMenuItem<String>>((String value) {
+//                      return DropdownMenuItem<String>(
+//                        value: value,
+//                        child: Text(value),
+//                      );
+//                    })
+//                        .toList(),
+//                  )
                 ])));
   }
 }

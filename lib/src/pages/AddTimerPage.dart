@@ -5,12 +5,7 @@ import 'package:monitr/src/components/TImerForm.dart';
 class AddTimerPageState extends State<AddTimerPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Timer'),
-      ),
-      body: TimerForm()
-    );
+    return Scaffold(body: Padding(padding: EdgeInsets.only(top: 30.0),child: TimerForm()));
   }
 }
 

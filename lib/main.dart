@@ -15,9 +15,8 @@ class MyApp extends StatelessWidget {
         '/httpRequests': (BuildContext context) => HttpRequest(),
       },
       initialRoute: '/home',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
+      theme:ThemeData.from(colorScheme: ColorScheme.dark(secondary: Colors.blueGrey)),
+      darkTheme: ThemeData.from(colorScheme: ColorScheme.dark(secondary: Colors.red)),
     );
   }
 }

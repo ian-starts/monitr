@@ -5,7 +5,7 @@ import 'dart:io';
 import 'dart:convert';
 
 
-class HttpRequestState extends State<HttpRequest> {
+class HttpRequest {
   var apiToken = 'cf729296a9771aa58656fb4da93a3306';
 //  var apiToken;
   var defaultWorkspaceId;
@@ -13,10 +13,11 @@ class HttpRequestState extends State<HttpRequest> {
 
 
   var workspaces;
-  var projects;
+  var projectsNames;
+  var projectIds;
 
 
-  void authenticate() async{
+  Future<List> authenticate() async{
     // getting api token and default workspace id
     var url = "https://www.toggl.com/api/v8/me";
 //    var basicAuth = 'Basic ' + base64Encode(utf8.encode('$userName:$password'));
@@ -36,6 +37,8 @@ class HttpRequestState extends State<HttpRequest> {
     apiToken = body["data"]["api_token"];
     defaultWorkspaceId = body["data"]["default_wid"];
     workspaces = body["data"]["workspaces"];
+
+    return body;
   }
 
   void startExampleTimer() async{
@@ -44,7 +47,7 @@ class HttpRequestState extends State<HttpRequest> {
 
     var description = "test timer";
     var start = "2020-04-06T15:35:47+02:00";
-    var projectId = projects[0]["id"];
+    var projectId = projectIds[0];
 
     var response = await http.post(
       url,
@@ -93,55 +96,8 @@ class HttpRequestState extends State<HttpRequest> {
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
 
-    projects = json.decode(response.body);
+    var projects = json.decode(response.body);
+
     print(projects);
   }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('http'),
-      ),
-
-      body: Center(
-        child: Row(
-         children: [
-           FlatButton(
-             onPressed: (){
-              authenticate();
-             },
-              child: Text(
-              "authenticate",
-               ),
-            ),
-
-           FlatButton(
-             onPressed: (){
-               getProjects();
-             },
-             child: Text(
-               "projects",
-             ),
-           ),
-
-           FlatButton(
-             onPressed: (){
-               startExampleTimer();
-             },
-             child: Text(
-               "set timer",
-             ),
-           ),
-      ]
-        )
-     )
-    );
-  }
-}
-
-class HttpRequest extends StatefulWidget {
-  @override
-  HttpRequestState createState() => HttpRequestState();
 }

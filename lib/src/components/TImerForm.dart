@@ -1,14 +1,17 @@
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:monitr/src/pages/HttpRequestsPage.dart';
+import 'dart:async';
 
 class TimerFormState extends State<TimerForm> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController controller = new TextEditingController();
   GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
 
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     // Build a Form widget using the _formKey created above
     // .
     return Form(
@@ -35,26 +38,28 @@ class TimerFormState extends State<TimerForm> {
                   AutoCompleteTextField<String>(
                     decoration: new InputDecoration(
                         contentPadding:
-                            EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 20.0),
+                         EdgeInsets.symmetric(horizontal: 3.0),
+                        icon: Icon(Icons.folder_open),
                         filled: true,
-                        hintText: 'Search Player Name',
+                        labelText: "Project",
+                        hintText: 'Select the project',
                         hintStyle: TextStyle(color: Colors.black)),
-                    itemBuilder: (context, item) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            item,
-                            style: TextStyle(fontSize: 16.0),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                          ),
-                          Text(
-                            item,
-                          )
-                        ],
-                      );
+                        itemBuilder: (context, item) {
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text(
+                                    item,
+                                    style: TextStyle(fontSize: 16.0),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(15.0),
+                                  ),
+                                  Text(
+                                    item,
+                                  )
+                                ],
+                              );
                     },
                     itemFilter: (item, query) {
                       return item

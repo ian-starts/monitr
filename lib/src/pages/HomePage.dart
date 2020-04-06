@@ -10,7 +10,7 @@ class HomePageState extends State<HomePage> {
       body: TimerList(items: <Widget>[],),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/httpRequests');
+          Navigator.of(context).pushNamed('/addTimer');
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
